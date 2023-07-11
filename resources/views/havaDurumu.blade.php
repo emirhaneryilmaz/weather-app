@@ -1,318 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hava Durumu </title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
 
-<div class="api">
-  <div class="container">
-  </div>
-</div>
-<section class="top-banner">
-  <div class="container">
-    <h1 class="heading">Simple Weather App</h1>
+    <div class="api">
+        <div class="container">
+        </div>
+    </div>
+    <section class="top-banner">
+        <div class="container">
+            <h1 class="heading">Simple Weather App</h1>
 
-    <form action="{{route('getData')}}" method="GET">
-      @csrf
-      <input type="text" id='id' name='sehir' placeholder="Search for a city" autofocus>
-      <button type="submit">SUBMIT</button>
-      <span class="msg"></span>
-    </form>
-  </div>
-</section>
-<section class="ajax-section">
-  <div class="container">
-    <ul class="cities"></ul>
-  </div>
-</section>
-<footer class="page-footer">
- 
-</footer>
+            <form action="{{ route('getData') }}" method="GET">
+                @csrf
+                <input type="text" id='id' name='sehir' placeholder="Search for a city" autofocus>
+                <button type="submit">SUBMIT</button>
+                <span class="msg"></span>
+            </form>
+        </div>
+    </section>
+    <section class="ajax-section">
+        <div class="container">
+            <ul class="cities"></ul>
+        </div>
+    </section>
+    <footer class="page-footer">
 
-<style>
-  /* RESET STYLES
+    </footer>
+
+    <style>
+        /* RESET STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-:root {
-  --bg_main: #0a1f44;
-  --text_light: #fff;
-  --text_med: #53627c;
-  --text_dark: #1e2432;
-  --red: #ff1e42;
-  --darkred: #c3112d;
-  --orange: #ff8c00;
-}
+        :root {
+            --bg_main: #0a1f44;
+            --text_light: #fff;
+            --text_med: #53627c;
+            --text_dark: #1e2432;
+            --red: #ff1e42;
+            --darkred: #c3112d;
+            --orange: #ff8c00;
+        }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-weight: normal;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: normal;
+        }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-button {
-  cursor: pointer;
-}
- 
-input {
-  -webkit-appearance: none;
-}
- 
-button,
-input {
-  border: none;
-  background: none;
-  outline: none;
-  color: inherit;
-}
+        button {
+            cursor: pointer;
+        }
 
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+        input {
+            -webkit-appearance: none;
+        }
 
-ul {
-  list-style: none;
-}
+        button,
+        input {
+            border: none;
+            background: none;
+            outline: none;
+            color: inherit;
+        }
 
-body {
-  font: 1rem/1.3 "Roboto", sans-serif;
-  background: var(--bg_main);
-  color: var(--text_dark);
-  padding: 70px;
-}
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
+        ul {
+            list-style: none;
+        }
+
+        body {
+            font: 1rem/1.3 "Roboto", sans-serif;
+            background: var(--bg_main);
+            color: var(--text_dark);
+            padding: 70px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
 
-/* SECTION #1
+        /* SECTION #1
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.top-banner {
-  color: var(--text_light);
-}
+        .top-banner {
+            color: var(--text_light);
+        }
 
-.heading {
-  font-weight: bold;
-  font-size: 4rem;
-  letter-spacing: 0.02em;
-  padding: 0 0 30px 0;
-}
+        .heading {
+            font-weight: bold;
+            font-size: 4rem;
+            letter-spacing: 0.02em;
+            padding: 0 0 30px 0;
+        }
 
-.top-banner form {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+        .top-banner form {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-.top-banner form input {
-  font-size: 2rem;
-  height: 40px;
-  padding: 5px 5px 10px;
-  border-bottom: 1px solid;
-}
+        .top-banner form input {
+            font-size: 2rem;
+            height: 40px;
+            padding: 5px 5px 10px;
+            border-bottom: 1px solid;
+        }
 
-.top-banner form input::placeholder {
-  color: currentColor; 
-}
+        .top-banner form input::placeholder {
+            color: currentColor;
+        }
 
-.top-banner form button {
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  padding: 15px 20px;
-  margin-left: 15px;
-  border-radius: 5px;
-  background: var(--red);
-  transition: background 0.3s ease-in-out;
-}
+        .top-banner form button {
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            padding: 15px 20px;
+            margin-left: 15px;
+            border-radius: 5px;
+            background: var(--red);
+            transition: background 0.3s ease-in-out;
+        }
 
-.top-banner form button:hover {
-  background: var(--darkred);
-}
+        .top-banner form button:hover {
+            background: var(--darkred);
+        }
 
-.top-banner form .msg {
-  position: absolute;
-  bottom: -40px;
-  left: 0;
-  max-width: 450px;
-  min-height: 40px;
-}
+        .top-banner form .msg {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            max-width: 450px;
+            min-height: 40px;
+        }
 
 
-/* SECTION #2
+        /* SECTION #2
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.ajax-section {
-  margin: 70px 0 20px;
-}
+        .ajax-section {
+            margin: 70px 0 20px;
+        }
 
-.ajax-section .cities {
-  display: grid;
-  grid-gap: 32px 20px;
-  grid-template-columns: repeat(4, 1fr);
-}
+        .ajax-section .cities {
+            display: grid;
+            grid-gap: 32px 20px;
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-.ajax-section .city {
-  position: relative;
-  padding: 40px 10%;
-  border-radius: 20px;
-  background: var(--text_light);
-  color: var(--text_med);
-}
+        .ajax-section .city {
+            position: relative;
+            padding: 40px 10%;
+            border-radius: 20px;
+            background: var(--text_light);
+            color: var(--text_med);
+        }
 
-.ajax-section .city::after {
-  content: '';
-  width: 90%;
-  height: 50px;
-  position: absolute;
-  bottom: -12px;
-  left: 5%;
-  z-index: -1;
-  opacity: 0.3;
-  border-radius: 20px;
-  background: var(--text_light);
-}
+        .ajax-section .city::after {
+            content: '';
+            width: 90%;
+            height: 50px;
+            position: absolute;
+            bottom: -12px;
+            left: 5%;
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 20px;
+            background: var(--text_light);
+        }
 
-.ajax-section figcaption {
-  margin-top: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
+        .ajax-section figcaption {
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-.ajax-section .city-temp {
-  font-size: 5rem;
-  font-weight: bold;
-  margin-top: 10px;
-  color: var(--text_dark);
-}
+        .ajax-section .city-temp {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--text_dark);
+        }
 
-.ajax-section .city sup {
-  font-size: 0.5em;
-}
+        .ajax-section .city sup {
+            font-size: 0.5em;
+        }
 
-.ajax-section .city-name sup {
-  padding: 0.2em 0.6em;
-  border-radius: 30px;
-  color: var(--text_light);
-  background: var(--orange);
-}
+        .ajax-section .city-name sup {
+            padding: 0.2em 0.6em;
+            border-radius: 30px;
+            color: var(--text_light);
+            background: var(--orange);
+        }
 
-.ajax-section .city-icon {
-  margin-top: 10px;
-  width: 100px;
-  height: 100px;
-}
+        .ajax-section .city-icon {
+            margin-top: 10px;
+            width: 100px;
+            height: 100px;
+        }
 
 
-/* FOOTER
+        /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.page-footer {
-  text-align: right;
-  font-size: 1rem;
-  color: var(--text_light);
-  margin-top: 40px;
-}
+        .page-footer {
+            text-align: right;
+            font-size: 1rem;
+            color: var(--text_light);
+            margin-top: 40px;
+        }
 
-.page-footer span {
-  color: var(--red);
-}
+        .page-footer span {
+            color: var(--red);
+        }
 
 
-/* MQ
+        /* MQ
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-@media screen and (max-width: 1000px) {
-  body {
-    padding: 30px;
-  }
-  
-  .ajax-section .cities {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+        @media screen and (max-width: 1000px) {
+            body {
+                padding: 30px;
+            }
 
-@media screen and (max-width: 700px) {
-  .heading,
-  .ajax-section .city-temp {
-    font-size: 3rem;
-  }
-  
-  .ajax-section {
-    margin-top: 20px;
-  }
-  
-  .top-banner form {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .top-banner form input,
-  .top-banner form button {
-    width: 100%;
-  }
+            .ajax-section .cities {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
 
-  .top-banner form button {
-    margin: 20px 0 0 0;
-  }
-  
-  .top-banner form .msg {
-    position: static;
-    max-width: none;
-    min-height: 0;
-    margin-top: 10px;
-  }
+        @media screen and (max-width: 700px) {
 
-  .ajax-section .cities {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+            .heading,
+            .ajax-section .city-temp {
+                font-size: 3rem;
+            }
 
-@media screen and (max-width: 500px) {
-  body {
-    padding: 15px;
-  }
-  
-  .ajax-section .cities {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
+            .ajax-section {
+                margin-top: 20px;
+            }
+
+            .top-banner form {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .top-banner form input,
+            .top-banner form button {
+                width: 100%;
+            }
+
+            .top-banner form button {
+                margin: 20px 0 0 0;
+            }
+
+            .top-banner form .msg {
+                position: static;
+                max-width: none;
+                min-height: 0;
+                margin-top: 10px;
+            }
+
+            .ajax-section .cities {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            body {
+                padding: 15px;
+            }
+
+            .ajax-section .cities {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
 
 
-/* API Key banner
+        /* API Key banner
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.api {
-  background: #fffbbc;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px;
-}
+        .api {
+            background: #fffbbc;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+        }
 
-.api a {
-  text-decoration: underline;
-}
+        .api a {
+            text-decoration: underline;
+        }
 
-.api a:hover {
-  text-decoration: none;
-}
-</style>
+        .api a:hover {
+            text-decoration: none;
+        }
+    </style>
 
-<script>
-  
-</script>
+    <script></script>
 </body>
+
 </html>
